@@ -3,44 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Febros16 - Frontend & Backend</title>
+    <title>FEBROS16 | Coming Soon</title>
+    <!-- Tunatumia Tailwind CSS kupitia CDN kwa haraka -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
-        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-        h1 { color: #333; }
-        #ujumbe { color: #007bff; font-weight: bold; font-size: 1.2em; margin-top: 20px; }
+        body {
+            background-color: #0f172a; /* Rangi nyeusi/bluu iliyokolea ya kisasa */
+        }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center text-white px-6 font-sans">
 
-    <div class="box">
-        <h1>Mfumo wa FEBROS16 Upo Hewani</h1>
-        <p>Hii ni Frontend iliyopo Netlify.</p>
+    <div class="max-w-4xl w-full text-center">
+        <!-- Logo / Jina la Mradi -->
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-4">
+            FEBROS<span class="text-blue-500">16</span>
+        </h1>
         
-        <!-- Hapa ndipo majibu kutoka kwa Go yataonekana -->
-        <p id="ujumbe">Inasubiri majibu kutoka kwa Server ya Go...</p>
+        <!-- Maelezo Mafupi -->
+        <p class="text-xl md:text-2xl text-gray-400 font-light mb-10 max-w-2xl mx-auto">
+            A Multipurpose Knowledge, Research, Education, and Discovery Platform.
+        </p>
         
-        <button onclick="pigaHodiBackend()">Uliza Backend (Render)</button>
+        <!-- Alama ya Coming Soon -->
+        <div class="inline-block border border-gray-700 bg-gray-800/50 rounded-full px-8 py-3 mb-12 shadow-lg backdrop-blur-sm">
+            <p class="text-sm md:text-base text-gray-300 uppercase tracking-widest font-semibold flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                Mfumo Unatengenezwa (Coming Soon)
+            </p>
+        </div>
+
+        <!-- Ujumbe wa Ziada -->
+        <div class="border-t border-gray-800 pt-8">
+            <p class="text-gray-500 text-sm">
+                Tunarudi hivi punde na mfumo kamili wa kimataifa. Kaa mkao wa kula!
+            </p>
+        </div>
     </div>
-
-    <script>
-        // Hii ni JavaScript ya kuongea na ile link ya Render
-        function pigaHodiBackend() {
-            document.getElementById('ujumbe').innerText = "Inatafuta majibu...";
-            
-            // Hapa tunaweka ile link ya Render
-            fetch('https://febros16-backend.onrender.com')
-                .then(response => response.text()) // Tunachukua majibu kama maandishi
-                .then(data => {
-                    // Tunaweka majibu kwenye HTML
-                    document.getElementById('ujumbe').innerText = "Backend Inasema: " + data;
-                })
-                .catch(error => {
-                    document.getElementById('ujumbe').innerText = "Kuna tatizo kuunganisha na Backend.";
-                    console.error('Kosa:', error);
-                });
-        }
-    </script>
 
 </body>
 </html>
