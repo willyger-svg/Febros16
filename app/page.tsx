@@ -16,10 +16,9 @@ export default function Home() {
           FEBROS<span className="text-blue-500">16</span>
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-          <Link href="#" className="hover:text-white transition-colors">Gundua</Link>
+          <Link href="/articles" className="hover:text-white transition-colors">Makala Zote</Link>
           <Link href="#" className="hover:text-white transition-colors">Tafiti</Link>
           <Link href="#" className="hover:text-white transition-colors">Fursa</Link>
-          <Link href="#" className="hover:text-white transition-colors">Maudhui</Link>
         </div>
         <div className="flex gap-4">
           <Link href="/login" className="px-5 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors">
@@ -50,12 +49,12 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button className="px-8 py-4 bg-white text-slate-950 font-bold rounded-full hover:bg-slate-200 transition-all transform hover:scale-105">
-            Anza Kufanya Utafiti
-          </button>
-          <button className="px-8 py-4 bg-slate-900 border border-slate-800 text-white font-medium rounded-full hover:bg-slate-800 hover:border-slate-700 transition-all">
-            Gundua Rasilimali
-          </button>
+          <Link href="/register" className="px-8 py-4 bg-white text-slate-950 font-bold rounded-full hover:bg-slate-200 transition-all transform hover:scale-105 text-center">
+            Anza Sasa
+          </Link>
+          <Link href="/articles" className="px-8 py-4 bg-slate-900 border border-slate-800 text-white font-medium rounded-full hover:bg-slate-800 hover:border-slate-700 transition-all text-center">
+            Soma Makala Zote
+          </Link>
         </div>
       </section>
 

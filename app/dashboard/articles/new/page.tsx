@@ -120,7 +120,13 @@ export default function NewArticle() {
               ></textarea>
             </div>
 
-            <div className="pt-4 border-t border-slate-800 flex justify-end">
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-4">
+              <Link 
+                href="/dashboard"
+                className="text-slate-400 hover:text-white font-medium transition-colors"
+              >
+                Ghairi
+              </Link>
               <button 
                 type="submit"
                 disabled={loading || !title.trim() || !content.trim()}

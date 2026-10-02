@@ -75,12 +75,20 @@ export default function Dashboard() {
             FEBROS<span className="text-blue-500">16</span>
           </Link>
           <div className="flex gap-4 items-center">
-            <span className="text-sm text-slate-400 hidden sm:block">Karibu, {user?.full_name}</span>
+            <Link 
+              href="/articles" 
+              className="text-sm text-slate-300 hover:text-white transition-colors"
+            >
+              Makala Zote
+            </Link>
+            <span className="text-sm text-slate-400 hidden sm:block border-l border-slate-700 pl-4">
+              Karibu, {user?.full_name}
+            </span>
             <button 
               onClick={logout}
-              className="bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm px-4 py-2 rounded-lg transition-colors border border-slate-700"
+              className="bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm px-4 py-2 rounded-lg transition-colors border border-slate-700 ml-2"
             >
-              Ondoka (Logout)
+              Ondoka
             </button>
           </div>
         </div>
@@ -122,13 +130,30 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Activity/Content Area (Placeholder kwa Phase 3) */}
+          {/* Activity/Content Area */}
           <div className="md:col-span-2 space-y-6">
+            
+            {/* Call to Action - Phase 3 */}
+            <div className="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-800/50 rounded-2xl p-8 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-2">Andika Makala Yako</h2>
+                <p className="text-slate-300 text-sm leading-relaxed max-w-md">
+                  Changia maarifa kwenye jukwaa la FEBROS16. Andika makala mpya, tafiti, au habari za teknolojia ukiwafikia wasomaji wetu.
+                </p>
+              </div>
+              <Link 
+                href="/dashboard/articles/new"
+                className="whitespace-nowrap bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]"
+              >
+                + Andika Makala Mpya
+              </Link>
+            </div>
+
             <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
               <h2 className="text-xl font-bold text-white mb-4">Muhtasari wa Shughuli Zako</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl">
-                  <h3 className="text-slate-400 text-sm font-medium">Makala Ulizosoma</h3>
+                  <h3 className="text-slate-400 text-sm font-medium">Makala Ulizoandika</h3>
                   <p className="text-3xl font-bold text-white mt-2">0</p>
                 </div>
                 <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl">
@@ -138,13 +163,6 @@ export default function Dashboard() {
               </div>
             </div>
             
-            <div className="bg-blue-900/20 border border-blue-900/50 rounded-2xl p-6 shadow-xl">
-              <h2 className="text-lg font-bold text-blue-400 mb-2">Phase 3 Ipo Njiani! 🚀</h2>
-              <p className="text-slate-300 text-sm leading-relaxed">
-                Umefanikiwa kuingia (Login) kikamilifu na mfumo wa JWT unafanya kazi. 
-                Sehemu hii itaanza kuonyesha Makala (Articles), Kampeni (kama OO24), na Workspace yako ya Utafiti (Research) katika awamu inayofuata.
-              </p>
-            </div>
           </div>
           
         </div>
