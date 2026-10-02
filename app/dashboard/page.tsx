@@ -141,12 +141,20 @@ export default function Dashboard() {
                   Changia maarifa kwenye jukwaa la FEBROS16. Andika makala mpya, tafiti, au habari za teknolojia ukiwafikia wasomaji wetu.
                 </p>
               </div>
-              <Link 
-                href="/dashboard/articles/new"
-                className="whitespace-nowrap bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]"
-              >
-                + Andika Makala Mpya
-              </Link>
+              <div className="flex flex-col gap-3">
+                <Link 
+                  href="/dashboard/articles/new"
+                  className="text-center whitespace-nowrap bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]"
+                >
+                  + Andika Makala Mpya
+                </Link>
+                <Link 
+                  href="/articles"
+                  className="text-center whitespace-nowrap bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold py-3 px-6 rounded-xl transition-all"
+                >
+                  Tazama Makala Zote
+                </Link>
+              </div>
             </div>
 
             <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur-sm">

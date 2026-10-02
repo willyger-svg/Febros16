@@ -11,6 +11,8 @@ export default function NewArticle() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [rememberChoice, setRememberChoice] = useState(false);
   const router = useRouter();
 
   // Simple slug generator
@@ -35,19 +37,21 @@ export default function NewArticle() {
           title: title,
           slug: slug,
           content_body: content,
-          // Category can be null for now since we haven't built category CRUD yet
           category_id: null 
         }),
       });
 
-      setSuccess('Makala imechapishwa kikamilifu!');
       setTitle('');
       setContent('');
       
-      // Redirect to articles feed after 2 seconds
-      setTimeout(() => {
+      const pref = localStorage.getItem('postRedirectPreference');
+      if (pref === 'redirect') {
         router.push('/articles');
-      }, 2000);
+      } else if (pref === 'stay') {
+        setSuccess('Makala imechapishwa kikamilifu!');
+      } else {
+        setShowModal(true);
+      }
       
     } catch (err: any) {
       setError(err.message || 'Kuna tatizo la mtandao. Tafadhali jaribu tena.');
@@ -56,8 +60,61 @@ export default function NewArticle() {
     }
   };
 
+  const handleModalChoice = (choice: 'redirect' | 'stay') => {
+    if (rememberChoice) {
+      localStorage.setItem('postRedirectPreference', choice);
+    }
+    setShowModal(false);
+    
+    if (choice === 'redirect') {
+      router.push('/articles');
+    } else {
+      setSuccess('Makala imechapishwa kikamilifu!');
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans p-4 sm:p-8">
+    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans p-4 sm:p-8 relative">
+      {/* Modal Overlay */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full animate-in fade-in zoom-in duration-200">
+            <div className="w-16 h-16 bg-green-900/30 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+              ✓
+            </div>
+            <h2 className="text-xl font-bold text-white text-center mb-2">Makala Imechapishwa!</h2>
+            <p className="text-slate-300 text-center text-sm mb-6">
+              Makala yako imechapishwa kikamilifu! Je, unataka kwenda kuiona sasa, au unataka kubaki hapa uandike nyingine?
+            </p>
+            
+            <label className="flex items-center gap-3 mb-6 p-3 bg-slate-950/50 rounded-lg cursor-pointer border border-slate-800 hover:border-slate-700 transition-colors">
+              <input 
+                type="checkbox" 
+                checked={rememberChoice}
+                onChange={(e) => setRememberChoice(e.target.checked)}
+                className="w-4 h-4 rounded bg-slate-800 border-slate-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-slate-900"
+              />
+              <span className="text-sm text-slate-300 select-none">Kumbuka chaguo langu (Usiniulize tena)</span>
+            </label>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button 
+                onClick={() => handleModalChoice('stay')}
+                className="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-medium py-2.5 rounded-xl transition-colors border border-slate-700"
+              >
+                Baki hapa
+              </button>
+              <button 
+                onClick={() => handleModalChoice('redirect')}
+                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-xl transition-colors shadow-lg shadow-blue-500/20"
+              >
+                Nenda nikaione
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-3xl mx-auto">
         
         {/* Header */}
