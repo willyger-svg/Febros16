@@ -9,16 +9,38 @@ export default function Register() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const router = useRouter();
+
+  const generateStrongPassword = () => {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    let newPassword = "";
+    for (let i = 0; i < 12; i++) {
+      newPassword += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setPassword(newPassword);
+    setShowPassword(true);
+    // Setting a temporary success message for toast
+    setSuccess("Nenosiri limezalishwa. Tafadhali likopi na kulihifadhi mahali salama!");
+    setTimeout(() => {
+      setSuccess('');
+    }, 4000);
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setSuccess('');
+
+    if (password.length < 8) {
+      setError('Nenosiri lazima liwe na angalau herufi 8');
+      setLoading(false);
+      return;
+    }
 
     try {
       const data = await fetchApi('/api/v1/auth/register', {
@@ -96,14 +118,33 @@ export default function Register() {
 
           <div>
             <label className="block text-sm font-medium text-slate-400 mb-1">Nenosiri (Password)</label>
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder-slate-600"
-            />
+            <div className="relative">
+              <input 
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 pr-12 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors placeholder-slate-600"
+              />
+              <button 
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 px-3 flex items-center text-slate-400 hover:text-white"
+              >
+                {showPassword ? "👁️‍🗨️" : "👁️"}
+              </button>
+            </div>
+            <div className="flex justify-between items-center mt-2">
+              <p className="text-xs text-slate-500">Angalau herufi 8</p>
+              <button 
+                type="button" 
+                onClick={generateStrongPassword}
+                className="text-xs text-blue-400 hover:text-blue-300 font-medium"
+              >
+                Tengeneza Nenosiri Imara
+              </button>
+            </div>
           </div>
 
           <button 
