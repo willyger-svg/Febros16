@@ -23,6 +23,7 @@ interface UserStats {
 export default function Dashboard() {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [userStats, setUserStats] = useState<UserStats | null>(null);
+  const [myArticles, setMyArticles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -33,13 +34,17 @@ export default function Dashboard() {
         const data = await fetchApi('/api/v1/users/me');
         if (data.data?.user) {
           setUser(data.data.user);
+          // Baada ya kupata user ID, vuta makala zake tu
+          const articlesData = await fetchApi(`/api/v1/articles?author_id=${data.data.user.id}`);
+          if (articlesData.data?.articles) {
+            setMyArticles(articlesData.data.articles);
+          }
         }
         if (data.data?.stats) {
           setUserStats(data.data.stats);
         }
       } catch (err: any) {
         setError(err.message || 'Imeshindwa kupata taarifa.');
-        // Kama kosa ni unauthorized (token imeisha muda au haipo), mpeleke login
         if (err.message.toLowerCase().includes('unauthorized') || err.message.toLowerCase().includes('token')) {
           logout();
         }
@@ -50,6 +55,24 @@ export default function Dashboard() {
 
     loadProfile();
   }, []);
+
+  const handleDeleteArticle = async (id: string, title: string) => {
+    if (!confirm(`Una uhakika unataka kufuta makala hii?\n\n"${title}"\n\nHatua hii haiwezi kurejeshwa.`)) {
+      return;
+    }
+    
+    try {
+      await fetchApi(`/api/v1/articles/${id}`, {
+        method: 'DELETE',
+      });
+      // Update UI after delete
+      setMyArticles(prev => prev.filter(article => article.id !== id));
+      setUserStats(prev => prev ? { ...prev, total_articles: prev.total_articles - 1 } : null);
+      alert('Makala imefutwa kikamilifu.');
+    } catch (err: any) {
+      alert(err.message || 'Imeshindwa kufuta makala.');
+    }
+  };
 
   if (loading) {
     return (
@@ -178,6 +201,70 @@ export default function Dashboard() {
                   <p className="text-3xl font-bold text-white mt-2">{userStats ? userStats.total_research_projects : 0}</p>
                 </div>
               </div>
+            </div>
+
+            {/* My Articles List */}
+            <div className="bg-slate-900/80 border border-slate-800 rounded-2xl shadow-xl backdrop-blur-sm overflow-hidden">
+              <div className="p-6 border-b border-slate-800">
+                <h2 className="text-xl font-bold text-white">Makala Zangu</h2>
+              </div>
+              
+              {myArticles.length === 0 ? (
+                <div className="p-8 text-center text-slate-400">
+                  <p>Bado hujaandika makala yoyote.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-slate-950 text-slate-400 text-sm border-b border-slate-800">
+                        <th className="p-4 font-medium">Kichwa cha Habari</th>
+                        <th className="p-4 font-medium hidden sm:table-cell">Hali</th>
+                        <th className="p-4 font-medium hidden sm:table-cell">Tarehe</th>
+                        <th className="p-4 font-medium text-right">Vitendo</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-sm">
+                      {myArticles.map((article) => (
+                        <tr key={article.id} className="border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors">
+                          <td className="p-4">
+                            <p className="font-semibold text-slate-200 line-clamp-1">{article.title}</p>
+                            <span className="sm:hidden text-xs text-slate-500 mt-1 block">
+                              {new Date(article.created_at).toLocaleDateString()}
+                            </span>
+                          </td>
+                          <td className="p-4 hidden sm:table-cell">
+                            <span className={`px-2 py-1 text-xs rounded-full border ${
+                              article.status === 'published' 
+                                ? 'bg-green-900/20 text-green-400 border-green-800/50' 
+                                : 'bg-slate-800 text-slate-400 border-slate-700'
+                            }`}>
+                              {article.status}
+                            </span>
+                          </td>
+                          <td className="p-4 hidden sm:table-cell text-slate-400">
+                            {new Date(article.created_at).toLocaleDateString()}
+                          </td>
+                          <td className="p-4 text-right space-x-2">
+                            <Link 
+                              href={`/dashboard/articles/${article.id}/edit`}
+                              className="inline-block px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded border border-slate-700 transition-colors"
+                            >
+                              Badili
+                            </Link>
+                            <button 
+                              onClick={() => handleDeleteArticle(article.id, article.title)}
+                              className="inline-block px-3 py-1 bg-red-900/20 hover:bg-red-900/40 text-red-400 rounded border border-red-800/30 transition-colors"
+                            >
+                              Futa
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
             
           </div>
