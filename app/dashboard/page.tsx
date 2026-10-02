@@ -15,8 +15,14 @@ interface UserProfile {
   created_at: string;
 }
 
+interface UserStats {
+  total_articles: number;
+  total_research_projects: number;
+}
+
 export default function Dashboard() {
   const [user, setUser] = useState<UserProfile | null>(null);
+  const [userStats, setUserStats] = useState<UserStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -27,6 +33,9 @@ export default function Dashboard() {
         const data = await fetchApi('/api/v1/users/me');
         if (data.data?.user) {
           setUser(data.data.user);
+        }
+        if (data.data?.stats) {
+          setUserStats(data.data.stats);
         }
       } catch (err: any) {
         setError(err.message || 'Imeshindwa kupata taarifa.');
@@ -162,11 +171,11 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl">
                   <h3 className="text-slate-400 text-sm font-medium">Makala Ulizoandika</h3>
-                  <p className="text-3xl font-bold text-white mt-2">0</p>
+                  <p className="text-3xl font-bold text-white mt-2">{userStats ? userStats.total_articles : 0}</p>
                 </div>
                 <div className="bg-slate-950 border border-slate-800 p-4 rounded-xl">
                   <h3 className="text-slate-400 text-sm font-medium">Miradi ya Utafiti</h3>
-                  <p className="text-3xl font-bold text-white mt-2">0</p>
+                  <p className="text-3xl font-bold text-white mt-2">{userStats ? userStats.total_research_projects : 0}</p>
                 </div>
               </div>
             </div>
