@@ -20,8 +20,15 @@ export default function ArticlesFeed() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // Check auth status
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    }
+
     const fetchArticles = async () => {
       try {
         // Fetch direct since it's a public API (no token required)
@@ -55,18 +62,39 @@ export default function ArticlesFeed() {
             FEBROS<span className="text-blue-500">16</span>
           </Link>
           <div className="flex gap-4 items-center">
-            <Link 
-              href="/dashboard/articles/new" 
-              className="text-sm bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
-            >
-              Andika Makala
-            </Link>
-            <Link 
-              href="/login" 
-              className="text-sm text-slate-300 hover:text-white transition-colors hidden sm:block"
-            >
-              Ingia
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link 
+                  href="/dashboard" 
+                  className="text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-4 py-2 rounded-lg transition-colors border border-slate-700"
+                >
+                  Dashboard
+                </Link>
+                <button 
+                  onClick={() => {
+                    import('@/lib/api').then(({ logout }) => logout());
+                  }}
+                  className="text-sm text-red-400 hover:text-red-300 font-medium px-2 hidden sm:block"
+                >
+                  Ondoka
+                </button>
+              </>
+            ) : (
+              <>
+                <Link 
+                  href="/login" 
+                  className="text-sm text-slate-300 hover:text-white transition-colors hidden sm:block"
+                >
+                  Ingia
+                </Link>
+                <Link 
+                  href="/register" 
+                  className="text-sm bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+                >
+                  Jiunge
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>

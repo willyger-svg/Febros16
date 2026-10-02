@@ -1,6 +1,17 @@
+"use client";
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    }
+  }, []);
   return (
     <main className="min-h-screen bg-slate-950 relative overflow-hidden text-slate-200 font-sans">
       
@@ -20,13 +31,31 @@ export default function Home() {
           <Link href="#" className="hover:text-white transition-colors">Tafiti</Link>
           <Link href="#" className="hover:text-white transition-colors">Fursa</Link>
         </div>
-        <div className="flex gap-4">
-          <Link href="/login" className="px-5 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors">
-            Ingia
-          </Link>
-          <Link href="/register" className="px-5 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
-            Jiunge
-          </Link>
+        <div className="flex gap-4 items-center">
+          {isLoggedIn ? (
+            <>
+              <Link href="/dashboard" className="px-5 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors border border-slate-700 rounded-full bg-slate-800 hover:bg-slate-700">
+                Dashboard
+              </Link>
+              <button 
+                onClick={() => {
+                  import('@/lib/api').then(({ logout }) => logout());
+                }}
+                className="px-5 py-2 text-sm font-medium text-red-400 hover:text-red-300 transition-colors"
+              >
+                Ondoka
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="px-5 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors">
+                Ingia
+              </Link>
+              <Link href="/register" className="px-5 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                Jiunge
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 
