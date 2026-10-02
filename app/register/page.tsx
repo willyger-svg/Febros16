@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchApi } from '@/lib/api';
 
 export default function Register() {
   const [fullName, setFullName] = useState('');
@@ -19,24 +20,13 @@ export default function Register() {
     setError('');
     setSuccess('');
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://febros16-backend.onrender.com';
-
     try {
-      const response = await fetch(`${apiUrl}/api/v1/auth/register`, {
+      const data = await fetchApi('/api/v1/auth/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ full_name: fullName, email, password }),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || data.error || 'Usajili umeshindwa. Jaribu tena.');
-      }
-
-      setSuccess('Usajili umefanikiwa! Tafadhali ingia sasa.');
+      setSuccess(data.message || 'Usajili umefanikiwa! Tafadhali ingia sasa.');
       setFullName('');
       setEmail('');
       setPassword('');
@@ -55,8 +45,6 @@ export default function Register() {
 
   return (
     <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden text-slate-200 font-sans">
-      
-      {/* Miale ya mwanga (Glow Effects) kwa nyuma */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none"></div>
       

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchApi } from '@/lib/api';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -16,33 +17,21 @@ export default function Login() {
     setLoading(true);
     setError('');
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://febros16-backend.onrender.com';
-
     try {
-      const response = await fetch(`${apiUrl}/api/v1/auth/login`, {
+      const data = await fetchApi('/api/v1/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || data.error || 'Nenosiri au email si sahihi.');
+      // Hifadhi Token kwenye localStorage kwa usalama
+      if (data.data?.token) {
+        localStorage.setItem('token', data.data.token);
       }
 
-      // Hifadhi Token kwenye localStorage
-      if (data.token) {
-        localStorage.setItem('token', data.token);
-      }
-
-      // Mpeleke mtumiaji kwenye dashboard au ukurasa wa ndani baada ya kuingia
-      router.push('/dashboard'); // Badilisha kama huna '/dashboard' kwa sasa
-
+      // Mpeleke mtumiaji kwenye dashboard
+      router.push('/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Kuna tatizo la mtandao, tafadhali jaribu tena.');
+      setError(err.message || 'Kuna tatizo, tafadhali jaribu tena.');
     } finally {
       setLoading(false);
     }
@@ -50,8 +39,6 @@ export default function Login() {
 
   return (
     <main className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden text-slate-200 font-sans">
-      
-      {/* Miale ya mwanga (Glow Effects) kwa nyuma */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-indigo-900/10 rounded-full blur-[100px] pointer-events-none"></div>
       
