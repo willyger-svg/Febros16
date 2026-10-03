@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchApi } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import {
@@ -279,6 +279,12 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
   const [stage, setStage] = useState<'intro' | 'answering' | 'completed_prompt' | 'results'>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
+
+  useEffect(() => {
+    if (stage === 'answering' || stage === 'results' || stage === 'completed_prompt') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentQuestionIndex, stage]);
 
   const currentQ = QUESTIONS[currentQuestionIndex];
   const totalQuestions = QUESTIONS.length;
