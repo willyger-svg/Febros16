@@ -100,15 +100,11 @@ export const LandingPage: React.FC = () => {
           {/* Subtle Ambient Glow inside glass */}
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Glass Badge */}
-          <div className="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-blue-200 text-xs sm:text-sm font-medium mb-6 shadow-md">
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            <span>Jukwaa Kuu la Maarifa ya Kweli, Tafiti na Fursa</span>
-          </div>
+          
 
           {/* Primary Headline with Glass Depth */}
           <h1 className="relative z-10 text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15] drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)] text-balance">
-            Where Verified Knowledge Meets Global Ambition.
+            Mahali Ambapo Maarifa ya Kweli Yanakutana na Fursa za Kimataifa.
           </h1>
 
           {/* Description Maelezo inside Glass Container */}
