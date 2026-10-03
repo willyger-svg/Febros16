@@ -10,6 +10,7 @@ import QuickHelpTab from './dashboard/QuickHelpTab';
 import CheckinTab from './dashboard/CheckinTab';
 import LibraryTab from './dashboard/LibraryTab';
 import ResearchTab from './dashboard/ResearchTab';
+import SettingsTab from './dashboard/SettingsTab';
 
 interface DashboardPageProps {
   onNavigateHome: () => void;
@@ -114,6 +115,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       {activeTab === 'checkin' && <CheckinTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
       {activeTab === 'library' && <LibraryTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
       {activeTab === 'research' && <ResearchTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
+      {activeTab === 'settings' && <SettingsTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
     </DashboardLayout>
   );
 };
