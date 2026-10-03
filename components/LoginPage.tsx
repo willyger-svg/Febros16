@@ -64,7 +64,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       
       setIsSuccess(true);
       setTimeout(() => {
-        router.push('/dashboard');
+        if (data.data?.has_completed_assessment) {
+          router.push('/dashboard');
+        } else {
+          router.push('/assessment');
+        }
       }, 1000);
     } catch (err: any) {
       setErrorMsg(err.message || 'Kuna tatizo, tafadhali jaribu tena.');
