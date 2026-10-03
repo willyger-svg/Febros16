@@ -46,7 +46,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
       {/* Header Greeting (100% Swahili) */}
       <div className="space-y-1">
         <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2">
-          <span>Karibu tena</span>
+          <span>Karibu tena, {user?.full_name?.split(" ")[0] || "Mtafiti"}</span>
           <span className="inline-block animate-bounce">👋</span>
         </h1>
         <p className="text-base sm:text-lg text-slate-200 font-normal">

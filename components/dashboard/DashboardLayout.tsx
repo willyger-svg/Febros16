@@ -140,9 +140,13 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
               className="flex items-center gap-2.5 p-1.5 pr-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
             >
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shadow-md">
-                J
-              </div>
+              {user?.profile_picture_url ? (
+                <img src={user.profile_picture_url} alt={user?.full_name || "Mtumiaji"} className="w-7 h-7 rounded-lg object-cover shadow-md" />
+              ) : (
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xs font-bold shadow-md">
+                  {user?.full_name ? user.full_name.charAt(0).toUpperCase() : 'U'}
+                </div>
+              )}
               <span className="text-xs font-semibold text-slate-200 hidden sm:inline-block">
                 Wasifu Wangu
               </span>
@@ -154,9 +158,14 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 className="absolute right-0 mt-3 w-56 rounded-2xl backdrop-blur-2xl bg-slate-950/95 border border-white/20 p-2 shadow-2xl z-50 animate-in fade-in"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="px-3 py-2 border-b border-white/10">
-                  <p className="text-xs font-bold text-white">Juma Rashid</p>
-                  <p className="text-[11px] text-slate-400">juma@febros16.com</p>
+                <div className="px-3 py-2 border-b border-white/10 flex items-center gap-3">
+                  {user?.profile_picture_url && (
+                    <img src={user.profile_picture_url} alt="Profile" className="w-10 h-10 rounded-lg object-cover" />
+                  )}
+                  <div>
+                    <p className="text-xs font-bold text-white truncate max-w-[150px]">{user?.full_name || "Mtumiaji"}</p>
+                    <p className="text-[11px] text-slate-400 truncate max-w-[150px]">{user?.email || "barua@pepe.com"}</p>
+                  </div>
                 </div>
                 <div className="py-1">
                   <button
