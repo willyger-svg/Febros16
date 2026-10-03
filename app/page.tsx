@@ -7,7 +7,6 @@ import CategorySection from '../components/CategorySection';
 import ResearchWorkflowSection from '../components/ResearchWorkflowSection';
 import PlatformEcosystemSection from '../components/PlatformEcosystemSection';
 import SearchModal from '../components/SearchModal';
-import AuthModal from '../components/AuthModal';
 import DetailModal from '../components/DetailModal';
 import { StatItem, FeatureCardItem, CategoryItem, SearchResult } from '../src/types';
 import { HERO_STATS, FEATURE_CARDS, CATEGORIES } from '../src/data/mockData';
@@ -18,9 +17,7 @@ export default function HomePage() {
   const [categories, setCategories] = useState<CategoryItem[]>(CATEGORIES);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
-  const [selectedFeature, setSelectedFeature] = useState<FeatureCardItem | null>(null);
+      const [selectedFeature, setSelectedFeature] = useState<FeatureCardItem | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<CategoryItem | null>(null);
   const [selectedSearchResult, setSelectedSearchResult] = useState<SearchResult | null>(null);
 
@@ -79,12 +76,7 @@ export default function HomePage() {
         onSelectResult={(res) => setSelectedSearchResult(res)}
       />
 
-      <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        initialMode={authMode}
-      />
-
+      
       <DetailModal
         isOpen={!!selectedFeature || !!selectedCategory || !!selectedSearchResult}
         onClose={() => {

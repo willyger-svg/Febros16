@@ -17,6 +17,18 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) setIsLoggedIn(true);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    window.location.href = '/';
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,23 +111,41 @@ export const Navbar: React.FC<NavbarProps> = ({
               </kbd>
             </button>
 
-            {/* Sign In */}
-            <button
-              onClick={() => onOpenAuth?.('signin')}
-              type="button"
-              className="px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-800/60 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 whitespace-nowrap cursor-pointer"
-            >
-              Sign In
-            </button>
+            {/* Auth / Dashboard */}
+            {isLoggedIn ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-800/60 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 whitespace-nowrap cursor-pointer"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  type="button"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-medium text-white bg-red-600 hover:bg-red-500 rounded-lg shadow-sm shadow-red-900/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-red-400 whitespace-nowrap cursor-pointer"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-800/60 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 whitespace-nowrap cursor-pointer"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-sm shadow-blue-900/30 transition-all hover:shadow-blue-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 whitespace-nowrap cursor-pointer"
+                >
+                  <span>Create Account</span>
+                </Link>
+              </>
+            )}
 
-            {/* Create Account */}
-            <button
-              onClick={() => onOpenAuth?.('signup')}
-              type="button"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-sm shadow-blue-900/30 transition-all hover:shadow-blue-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 whitespace-nowrap cursor-pointer"
-            >
-              <span>Create Account</span>
-            </button>
+            
 
             {/* Mobile Hamburger */}
             <button
@@ -152,24 +182,43 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
 
             <div className="pt-4 mt-3 border-t border-slate-800/80 flex flex-col gap-2.5">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAuth?.('signup');
-                }}
-                className="w-full py-3 px-4 text-center text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-md transition-colors cursor-pointer"
-              >
-                Create Account
-              </button>
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAuth?.('signin');
-                }}
-                className="w-full py-3 px-4 text-center text-sm font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 rounded-lg transition-colors cursor-pointer"
-              >
-                Sign In
-              </button>
+              {isLoggedIn ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full py-3 px-4 text-center text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-md transition-colors cursor-pointer"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleLogout();
+                    }}
+                    className="w-full py-3 px-4 text-center text-sm font-semibold text-slate-300 hover:text-white bg-red-900/50 border border-red-800 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/register"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full py-3 px-4 text-center text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-md transition-colors cursor-pointer"
+                  >
+                    Create Account
+                  </Link>
+                  <Link
+                    href="/login"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full py-3 px-4 text-center text-sm font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Sign In
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
