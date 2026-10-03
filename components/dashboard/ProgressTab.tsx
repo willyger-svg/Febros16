@@ -19,6 +19,12 @@ interface ProgressTabProps {
 }
 
 export const ProgressTab: React.FC<ProgressTabProps> = ({ user, userStats, onNavigateTab }) => {
+  const getDaysSinceJoined = (dateString?: string) => {
+    if (!dateString || dateString.startsWith('0001') || dateString.startsWith('1970')) return 1;
+    const days = Math.floor((new Date().getTime() - new Date(dateString).getTime()) / (1000 * 3600 * 24));
+    return isNaN(days) || days < 1 ? 1 : days;
+  };
+
   const past7Days = [
     { day: 'Jumatatu', date: 'Sept 27', activities: 2 },
     { day: 'Jumanne', date: 'Sept 28', activities: 1 },
@@ -62,7 +68,7 @@ export const ProgressTab: React.FC<ProgressTabProps> = ({ user, userStats, onNav
             <Flame className="w-4 h-4 text-amber-400" />
           </div>
           <div className="text-3xl sm:text-4xl font-black text-white">
-            {userStats?.streak_days || 1} Siku
+            {getDaysSinceJoined(user?.created_at)} Siku
           </div>
           <p className="text-xs text-slate-300">Tangu ulipojiunga na FEBROS16.</p>
         </div>

@@ -19,6 +19,12 @@ interface OverviewTabProps {
 type MoodType = 'good' | 'okay' | 'struggling' | 'hard' | null;
 
 export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, userStats }) => {
+  const getDaysSinceJoined = (dateString?: string) => {
+    if (!dateString || dateString.startsWith('0001') || dateString.startsWith('1970')) return 1;
+    const days = Math.floor((new Date().getTime() - new Date(dateString).getTime()) / (1000 * 3600 * 24));
+    return isNaN(days) || days < 1 ? 1 : days;
+  };
+
   const [selectedMood, setSelectedMood] = useState<MoodType>(null);
   const [focusModalOpen, setFocusModalOpen] = useState(false);
 
@@ -77,7 +83,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
               🔥
             </div>
             <div>
-              <div className="text-2xl font-black text-white">{userStats?.streak_days || 1} Siku</div>
+              <div className="text-2xl font-black text-white">{getDaysSinceJoined(user?.created_at)} Siku</div>
               <div className="text-xs text-slate-300">Tangu Kujiunga</div>
             </div>
           </div>
@@ -99,7 +105,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
               <Compass className="w-6 h-6" />
             </div>
             <div>
-              <div className="text-2xl font-black text-white">Vichochezi 8</div>
+              <div className="text-2xl font-black text-white">{userStats?.triggers_identified || 0} Vichochezi</div>
               <div className="text-xs text-slate-300">Vimetambuliwa</div>
             </div>
           </div>
@@ -111,27 +117,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
         <span className="text-xs font-mono uppercase tracking-widest text-slate-400 font-bold block">
           LENGO LA LEO
         </span>
-
-        <div className="backdrop-blur-xl bg-slate-900/60 border border-white/15 rounded-3xl p-6 sm:p-7 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-5 relative overflow-hidden group hover:border-white/25 transition-all">
-          <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-[11px] font-mono">
-              <span>Zoezi la dakika 5</span>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white">
-              Kuelewa vichochezi vyako
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300">
-              Gundua vichochezi vinavyokushawishi kutumia skrini au kutafuta maudhui usiyokusudia unapokuwa umechoshwa.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setFocusModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl text-sm shadow-xl shadow-blue-900/40 border border-blue-400/30 transition-all cursor-pointer shrink-0 hover:scale-[1.02]"
-          >
-            <span>Anza Sasa →</span>
-          </button>
+        <div className="backdrop-blur-xl bg-slate-900/60 border border-white/15 rounded-3xl p-6 shadow-2xl flex items-center justify-center text-slate-400">
+          <p className="text-sm">Hakuna lengo lililowekwa kwa leo.</p>
         </div>
       </div>
 

@@ -34,6 +34,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     const loadProfile = async () => {
       try {
         const data = await fetchApi('/api/v1/users/me');
+        try {
+          const statsRes = await fetchApi('/api/v1/dashboard/stats');
+          if (statsRes.data) {
+             data.data.stats = { ...data.data.stats, ...statsRes.data };
+          }
+        } catch (statsErr) {
+          console.warn("Failed to fetch dashboard stats", statsErr);
+        }
         if (data.data?.user) {
           setUser(data.data.user);
         }

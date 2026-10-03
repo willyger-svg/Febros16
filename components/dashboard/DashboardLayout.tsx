@@ -100,7 +100,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               aria-label="Taarifa"
             >
               <Bell className="w-4 h-4" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-500 ring-2 ring-slate-950" />
+              
             </button>
 
             {/* Notifications Popover */}
@@ -110,7 +110,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                  <h4 className="text-xs font-bold text-white">Taarifa Zako (2 Mpya)</h4>
+                  <h4 className="text-xs font-bold text-white">Taarifa Zako</h4>
                   <button
                     type="button"
                     onClick={() => setNotificationsOpen(false)}
@@ -119,15 +119,8 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
                     Funga
                   </button>
                 </div>
-                <div className="mt-2 space-y-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
-                    <p className="font-semibold text-white">Hongera! Siku 7 mfululizo 🔥</p>
-                    <p className="text-[11px] text-slate-300">Umedumisha udhibiti wa matumizi ya vifaa vyako kwa wiki 1.</p>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
-                    <p className="font-semibold text-white">Zoezi la Leo Lipo Tayari</p>
-                    <p className="text-[11px] text-slate-300">Dakika 5 za kuelewa vichochezi vya uchovu na kuchoshwa.</p>
-                  </div>
+                <div className="mt-4 pb-2 text-center text-xs text-slate-400">
+                  <p>Hakuna taarifa mpya kwa sasa.</p>
                 </div>
               </div>
             )}
