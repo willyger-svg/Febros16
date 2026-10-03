@@ -39,6 +39,10 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showOTPForm, setShowOTPForm] = useState(false);
+  const [otpCode, setOtpCode] = useState("");
+  const [verifyLoading, setVerifyLoading] = useState(false);
+  const [verifyError, setVerifyError] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
 
   // Password strength calculation
@@ -90,11 +94,41 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
           password: password,
         }),
       });
-      setIsSuccess(true);
+      setShowOTPForm(true);
     } catch (err: any) {
       setErrorMsg(err.message || 'Kuna tatizo wakati wa usajili.');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setVerifyError('');
+    if (otpCode.length !== 6) {
+      setVerifyError('Tafadhali weka namba 6 za uthibitisho.');
+      return;
+    }
+    
+    setVerifyLoading(true);
+    try {
+      const res = await fetchApi('/api/v1/auth/verify', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          otp: otpCode,
+        }),
+      });
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token);
+        setIsSuccess(true);
+        setShowOTPForm(false);
+      }
+    } catch (err: any) {
+      setVerifyError(err.message || 'OTP sio sahihi au imeisha muda wake.');
+    } finally {
+      setVerifyLoading(false);
     }
   };
 
@@ -144,19 +178,48 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
             </div>
             <h2 className="text-2xl font-black text-white">Hongera, {fullName}!</h2>
             <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-              Akaunti yako ya FEBROS16 imetengenezwa kikamilifu. Tumetuma kiungo cha uthibitisho kwenda <strong>{email}</strong>.
+              Akaunti yako ya FEBROS16 imetengenezwa na kuthibitishwa kikamilifu. Sasa unaweza kuanza kutumia mfumo.
             </p>
-            <div className="mt-6 p-4 rounded-xl bg-slate-900/80 border border-white/10 text-xs text-slate-300 text-left space-y-1.5">
-              
-              
-            </div>
             <button
               type="button"
-              onClick={onNavigateHome}
+              onClick={() => { window.location.href = '/dashboard'; }}
               className="mt-6 w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-xl text-sm shadow-xl transition-all cursor-pointer"
             >
               Fungua Ukurasa Mkuu
             </button>
+          </div>
+        ) : showOTPForm ? (
+          <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl backdrop-blur-2xl bg-slate-950/80 border border-white/25 text-center shadow-2xl animate-in zoom-in-95">
+            <h2 className="text-2xl font-black text-white mb-2">Thibitisha Email</h2>
+            <p className="text-sm text-slate-300 mb-6">
+              Tume kutumia namba sita (6) za siri (OTP) kwenye barua pepe <strong>{email}</strong>. Tafadhali ziweke hapa chini.
+            </p>
+            
+            {verifyError && (
+              <div className="mb-4 flex items-start gap-2.5 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-sm text-rose-300 font-medium text-left">
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                <span>{verifyError}</span>
+              </div>
+            )}
+            
+            <form onSubmit={handleVerifyOTP} className="space-y-4">
+              <input
+                type="text"
+                maxLength={6}
+                value={otpCode}
+                onChange={(e) => setOtpCode(e.target.value.replace(/[^0-9]/g, ''))}
+                placeholder="000000"
+                className="w-full text-center tracking-[0.5em] font-mono text-2xl px-4 py-3 bg-slate-900/80 border border-white/20 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                required
+              />
+              <button
+                type="submit"
+                disabled={verifyLoading}
+                className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-xl text-sm shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {verifyLoading ? 'Inahakiki...' : 'Thibitisha Namba'}
+              </button>
+            </form>
           </div>
         ) : (
           <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
