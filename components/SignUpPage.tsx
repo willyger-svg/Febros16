@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { fetchApi, getApiUrl } from '@/lib/api';
 import {
@@ -394,9 +395,9 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                     />
                     <span>
                       Ninakubali{' '}
-                      <span className="text-blue-400 font-semibold underline">
+                      <Link href="/terms" target="_blank" className="text-blue-400 font-semibold hover:underline">
                         Vigezo na Masharti ya FEBROS16
-                      </span>{' '}
+                      </Link>{' '}
                       na Sera ya Faragha ya Takwimu za Utafiti.
                     </span>
                   </label>

@@ -53,7 +53,8 @@ export const Footer: React.FC = () => {
       links: [
         { label: 'febros16.com Domain', href: 'https://febros16.com' },
         { label: 'Editorial Policy', href: '#home' },
-        { label: 'Privacy Standards', href: '#home' },
+        { label: 'Vigezo na Masharti', href: '/terms' },
+        { label: 'Sera ya Faragha', href: '/terms' },
         { label: 'Citation Integrity', href: '#research-workflow' },
       ],
     },
