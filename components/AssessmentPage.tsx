@@ -462,7 +462,7 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
 
         {/* ================= STAGE 2: QUESTION SCREEN (Completely Card-Free, Fluid, Breathtaking) ================= */}
         {stage === 'answering' && (
-          <div className="space-y-8 animate-in fade-in duration-300 max-w-3xl mx-auto w-full">
+          <div key={currentQuestionIndex} className="space-y-8 animate-in fade-in zoom-in-[0.98] slide-in-from-right-4 duration-300 max-w-3xl mx-auto w-full">
             {/* Meta indicator: Section and question number */}
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono uppercase tracking-widest text-blue-300 font-semibold flex items-center gap-2">
