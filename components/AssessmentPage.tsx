@@ -291,6 +291,17 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
   const answeredCount = Object.keys(answers).length;
   const progressPercent = Math.round(((currentQuestionIndex + 1) / totalQuestions) * 100);
 
+  const questionColors = [
+    'text-white',
+    'text-emerald-400',
+    'text-amber-400',
+    'text-rose-400',
+    'text-violet-400',
+    'text-cyan-400',
+    'text-orange-400'
+  ];
+  const currentTextColor = questionColors[currentQuestionIndex % 7];
+
   const handleSelectChoice = (value: number) => {
     setAnswers((prev) => ({
       ...prev,
@@ -483,7 +494,7 @@ export const AssessmentPage: React.FC<AssessmentPageProps> = ({
 
             {/* The Floating Question (Fluid Large Typography) */}
             <div className="space-y-3">
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-snug drop-shadow">
+              <h2 className={`text-2xl sm:text-4xl font-extrabold ${currentTextColor} tracking-tight leading-snug drop-shadow transition-colors duration-500`}>
                 {currentQ.text}
               </h2>
 
