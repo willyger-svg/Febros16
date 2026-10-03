@@ -77,7 +77,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
               🔥
             </div>
             <div>
-              <div className="text-2xl font-black text-white">{user?.created_at ? Math.max(1, Math.floor((new Date().getTime() - new Date(user.created_at).getTime()) / (1000 * 3600 * 24))) : 1} Siku</div>
+              <div className="text-2xl font-black text-white">{userStats?.streak_days || 1} Siku</div>
               <div className="text-xs text-slate-300">Tangu Kujiunga</div>
             </div>
           </div>
