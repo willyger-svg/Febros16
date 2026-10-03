@@ -217,7 +217,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                 disabled={verifyLoading}
                 className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-xl text-sm shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                {verifyLoading ? 'Inahakiki...' : 'Thibitisha Namba'}
+                {verifyLoading ? 'Inahakiki...' : 'Thibitisha Msimbo'}
               </button>
             </form>
           </div>
