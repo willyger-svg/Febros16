@@ -33,9 +33,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState<'researcher' | 'student' | 'educator' | 'innovator'>('researcher');
-  const [fieldOfInterest, setFieldOfInterest] = useState('Technology & Artificial Intelligence');
-  const [agreeTerms, setAgreeTerms] = useState(false);
+      const [agreeTerms, setAgreeTerms] = useState(false);
   const [newsletterOptIn, setNewsletterOptIn] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -137,14 +135,8 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
               Akaunti yako ya FEBROS16 imetengenezwa kikamilifu. Tumetuma kiungo cha uthibitisho kwenda <strong>{email}</strong>.
             </p>
             <div className="mt-6 p-4 rounded-xl bg-slate-900/80 border border-white/10 text-xs text-slate-300 text-left space-y-1.5">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Nafasi: <strong>{role.toUpperCase()}</strong></span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Uwanja: <strong>{fieldOfInterest}</strong></span>
-              </div>
+              
+              
             </div>
             <button
               type="button"
@@ -272,53 +264,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                   </div>
                 </div>
 
-                {/* 2. Role Selector (Student, Researcher, Educator, Innovator) */}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5">
-                    Unajiunga Kama Nani? (Wadhifa)
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {[
-                      { id: 'researcher', label: 'Mtafiti' },
-                      { id: 'student', label: 'Mwanafunzi' },
-                      { id: 'educator', label: 'Mwalimu' },
-                      { id: 'innovator', label: 'Mbunifu' },
-                    ].map((item) => (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => setRole(item.id as any)}
-                        className={`py-2 px-2 text-xs font-semibold rounded-xl border transition-all text-center cursor-pointer ${
-                          role === item.id
-                            ? 'bg-blue-600/25 border-blue-500 text-amber-200 shadow-md'
-                            : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
-                        }`}
-                      >
-                        {item.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 3. Field of Interest */}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5">
-                    Sehemu Unayopenda Zaidi (Field of Interest)
-                  </label>
-                  <select
-                    value={fieldOfInterest}
-                    onChange={(e) => setFieldOfInterest(e.target.value)}
-                    className="w-full bg-slate-900/80 border border-white/20 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-blue-500 backdrop-blur-md cursor-pointer"
-                  >
-                    <option value="Technology & Artificial Intelligence" className="bg-slate-900 text-white">Teknolojia na Akili Mnemba (AI)</option>
-                    <option value="Environmental & Climate Science" className="bg-slate-900 text-white">Sayansi ya Mazingira na Tabianchi</option>
-                    <option value="Public Education Systems" className="bg-slate-900 text-white">Mifumo ya Elimu na Mitaala</option>
-                    <option value="Biomedical & Health Research" className="bg-slate-900 text-white">Utafiti wa Afya na Biolojia</option>
-                    <option value="Economics & Public Governance" className="bg-slate-900 text-white">Uchumi, Jamii na Uongozi</option>
-                  </select>
-                </div>
-
-                {/* 4. Password & Confirm Password */}
+                {/* 2. Password & Confirm Password */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
