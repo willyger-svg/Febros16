@@ -1,92 +1,37 @@
-"use client";
-
-import { useEffect, useState } from 'react';
+import React from 'react';
+import Navbar from '@/components/landing/Navbar';
+import HeroSection from '@/components/landing/HeroSection';
+import FeatureCards from '@/components/landing/FeatureCards';
+import CategoryGrid from '@/components/landing/CategoryGrid';
 import Link from 'next/link';
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
-      setIsLoggedIn(!!token);
-    }
-  }, []);
   return (
-    <main className="min-h-screen bg-slate-950 relative overflow-hidden text-slate-200 font-sans">
+    <main className="min-h-screen bg-slate-950 font-sans selection:bg-blue-500/30 selection:text-white">
+      <Navbar />
       
-      {/* Miale ya mwanga (Glow Effects) kwa nyuma */}
-      <div className="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-blue-900/30 rounded-full blur-[120px] opacity-70"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[100px] opacity-50"></div>
-      </div>
+      <HeroSection />
+      
+      <FeatureCards />
+      
+      <CategoryGrid />
 
-      {/* Navigation Bar */}
-      <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-10 border-b border-slate-800/50">
-        <div className="text-2xl font-extrabold tracking-tighter text-white">
-          FEBROS<span className="text-blue-500">16</span>
+      {/* Simple Footer */}
+      <footer className="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-xl font-extrabold tracking-tighter text-white">
+            FEBROS<span className="text-blue-500">16</span>
+          </div>
+          <p className="text-sm">
+            © {new Date().getFullYear()} FEBROS16. All rights reserved.
+          </p>
+          <div className="flex gap-6 text-sm">
+            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="#" className="hover:text-white transition-colors">Contact</Link>
+          </div>
         </div>
-        <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
-          <Link href="/articles" className="hover:text-white transition-colors">Makala Zote</Link>
-          <Link href="/research" className="hover:text-white transition-colors">Miradi ya Utafiti</Link>
-          <Link href="/campaigns/oo24" className="hover:text-white transition-colors">Kampeni (OO24)</Link>
-        </div>
-        <div className="flex gap-4 items-center">
-          {isLoggedIn ? (
-            <>
-              <Link href="/dashboard" className="px-5 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors border border-slate-700 rounded-full bg-slate-800 hover:bg-slate-700">
-                Dashboard
-              </Link>
-              <button 
-                onClick={() => {
-                  import('@/lib/api').then(({ logout }) => logout());
-                }}
-                className="px-5 py-2 text-sm font-medium text-red-400 hover:text-red-300 transition-colors"
-              >
-                Ondoka
-              </button>
-            </>
-          ) : (
-            <>
-              <Link href="/login" className="px-5 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors">
-                Ingia
-              </Link>
-              <Link href="/register" className="px-5 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]">
-                Jiunge
-              </Link>
-            </>
-          )}
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 flex flex-col items-center text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-800 mb-8 backdrop-blur-sm">
-          <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
-          <span className="text-xs font-medium text-slate-300 uppercase tracking-wider">Toleo la Kwanza Liko Njiani</span>
-        </div>
-
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tight leading-[1.1] mb-8 max-w-5xl">
-          Gundua, Jifunze na Fanya <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-            Tafiti za Kina
-          </span>
-        </h1>
-
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12 font-light leading-relaxed">
-          FEBROS16 ni jukwaa la kisasa linalounganisha watu na maarifa, taarifa, elimu, rasilimali, na fursa. Kusanya vyanzo vyako, chambua, na uelewe ulimwengu wako.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Link href="/register" className="px-8 py-4 bg-white text-slate-950 font-bold rounded-full hover:bg-slate-200 transition-all transform hover:scale-105 text-center">
-            Anza Sasa
-          </Link>
-          <Link href="/articles" className="px-8 py-4 bg-slate-900 border border-slate-800 text-white font-medium rounded-full hover:bg-slate-800 hover:border-slate-700 transition-all text-center">
-            Soma Makala Zote
-          </Link>
-        </div>
-      </section>
-
+      </footer>
     </main>
   );
 }
