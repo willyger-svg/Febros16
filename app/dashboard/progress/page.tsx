@@ -1,14 +1,14 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import { DashboardPage } from '../../components/DashboardPage';
+import DashboardPage from '../../../components/DashboardPage';
 
-export default function DashboardRoute() {
+export default function ProgressRoute() {
   const router = useRouter();
 
   return (
     <DashboardPage
-      initialTab="dashboard"
+      initialTab="progress"
       onNavigateHome={() => router.push('/')}
       onNavigateAssessment={() => router.push('/assessment')}
       onTabChange={(tab) => {
