@@ -91,13 +91,13 @@ export const ResearchWorkflowSection: React.FC = () => {
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 {project.status}
               </span>
-              <Link
-                href="/research"
-                className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 rounded-lg text-xs font-semibold transition-colors"
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600/20 text-blue-400 border border-blue-500/30 rounded-lg text-xs font-semibold cursor-default"
               >
-                <span>Open Workspace</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+                <span>Verified Protocol</span>
+                <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+              </button>
             </div>
           </div>
 

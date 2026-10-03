@@ -1,8 +1,7 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { Flag, ArrowRight, ShieldCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { Flag, ArrowRight, ShieldCheck, CheckCircle2, X } from 'lucide-react';
 
 interface PlatformEcosystemSectionProps {
   onOpenCampaign?: (campaignId: string) => void;
@@ -11,6 +10,15 @@ interface PlatformEcosystemSectionProps {
 export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> = ({
   onOpenCampaign,
 }) => {
+  const [selectedCampaign, setSelectedCampaign] = useState<{
+    id: string;
+    badge: string;
+    title: string;
+    desc: string;
+    stats: string;
+    details: string;
+  } | null>(null);
+
   const campaigns = [
     {
       id: 'oo24',
@@ -18,7 +26,7 @@ export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> =
       title: 'Project OO24: Cognitive Sovereignty',
       desc: 'A global campaign promoting deliberate information consumption, critical evaluation of machine-synthesized text, and intellectual independence.',
       stats: '14 Countries · 3,400+ Researchers Participating',
-      route: '/campaigns#oo24',
+      details: 'Project OO24 protects human cognitive focus against algorithmic dilution. We establish research standards, verifiable citations, and attention architecture for researchers.',
     },
     {
       id: 'digital-wellness',
@@ -26,7 +34,7 @@ export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> =
       title: 'Digital Wellness & Deep Work Standard',
       desc: 'Tools and institutional frameworks designed to protect cognitive bandwidth, reduce continuous partial attention, and support sustained scholarship.',
       stats: 'Open Research Toolkit Available',
-      route: '/campaigns#digital-wellness',
+      details: 'University-grade protocols for establishing uninterrupted contemplation blocks, asynchronous collaboration, and mental clarity.',
     },
     {
       id: 'open-curricula',
@@ -34,7 +42,7 @@ export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> =
       title: 'Global Open Knowledge Commons',
       desc: 'Standardized open access to graduate-level course notes, datasets, and laboratory methodology templates for underfunded institutions.',
       stats: '250+ Datasets Hosted',
-      route: '/campaigns#open-commons',
+      details: 'Democratizing peer review, open datasets, and open educational resources without commercial subscription barriers.',
     },
   ];
 
@@ -66,10 +74,12 @@ export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> =
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {campaigns.map((camp) => (
-            <Link
+            <div
               key={camp.id}
-              href={camp.route}
+              onClick={() => setSelectedCampaign(camp)}
               className="group p-7 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900/90 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+              role="button"
+              tabIndex={0}
             >
               <div>
                 <span className="text-xs font-semibold text-blue-400">
@@ -93,7 +103,7 @@ export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> =
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -115,10 +125,40 @@ export const PlatformEcosystemSection: React.FC<PlatformEcosystemSectionProps> =
           <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
             <span>Domain: febros16.com</span>
             <span aria-hidden="true">·</span>
-            <span>REST API Ready</span>
+            <span>Independent & Open</span>
           </div>
         </div>
       </div>
+
+      {/* Campaign Detail Modal */}
+      {selectedCampaign && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+          <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700 rounded-2xl p-6 sm:p-8 text-white shadow-2xl">
+            <button
+              onClick={() => setSelectedCampaign(null)}
+              className="absolute top-5 right-5 p-1 text-slate-400 hover:text-white bg-slate-800 rounded-lg cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-400">
+              {selectedCampaign.badge}
+            </span>
+            <h3 className="mt-2 text-2xl font-bold">{selectedCampaign.title}</h3>
+            <p className="mt-3 text-sm text-slate-300 leading-relaxed">{selectedCampaign.details}</p>
+            <div className="mt-4 p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-400">
+              <strong>Impact:</strong> {selectedCampaign.stats}
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setSelectedCampaign(null)}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-semibold"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

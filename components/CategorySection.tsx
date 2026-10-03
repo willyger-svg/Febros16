@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
 import {
   GraduationCap,
   Cpu,
@@ -17,9 +16,13 @@ import { CategoryItem } from '../src/types';
 
 interface CategorySectionProps {
   categories: CategoryItem[];
+  onSelectCategory?: (category: CategoryItem) => void;
 }
 
-export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) => {
+export const CategorySection: React.FC<CategorySectionProps> = ({
+  categories,
+  onSelectCategory,
+}) => {
   const renderCategoryIcon = (iconName: string) => {
     const iconClass = 'w-6 h-6 text-white';
     switch (iconName) {
@@ -151,10 +154,12 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat) => (
-            <Link
+            <div
               key={cat.id}
-              href={`/knowledge?category=${cat.slug}`}
-              className="group relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between p-6 bg-slate-950"
+              onClick={() => onSelectCategory?.(cat)}
+              className="group relative h-80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between p-6 bg-slate-950 cursor-pointer"
+              role="button"
+              tabIndex={0}
               aria-label={`Category: ${cat.name}. ${cat.description}`}
             >
               <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
@@ -195,7 +200,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
                   ))}
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

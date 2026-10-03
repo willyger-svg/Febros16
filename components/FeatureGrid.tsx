@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
 import {
   Compass,
   GraduationCap,
@@ -50,10 +49,12 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {features.map((feature, idx) => (
-          <Link
+          <div
             key={feature.id}
-            href={feature.route}
+            onClick={() => onSelectFeature?.(feature)}
             className="group relative bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 hover:border-blue-500/60 rounded-2xl p-6 sm:p-7 shadow-xl shadow-black/40 hover:shadow-2xl hover:shadow-blue-900/20 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+            role="button"
+            tabIndex={0}
             aria-label={`${feature.title}: ${feature.description}`}
           >
             <div>
@@ -83,7 +84,7 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </section>
