@@ -10,10 +10,12 @@ import {
 import { DashboardTabId } from './DashboardLayout';
 
 interface LearnTabProps {
+  user?: any;
+  userStats?: any;
   onNavigateTab: (tab: DashboardTabId) => void;
 }
 
-export const LearnTab: React.FC<LearnTabProps> = ({ onNavigateTab }) => {
+export const LearnTab: React.FC<LearnTabProps> = ({ user, userStats, onNavigateTab }) => {
   const [activeModuleIndex, setActiveModuleIndex] = useState(0);
 
   const modules = [

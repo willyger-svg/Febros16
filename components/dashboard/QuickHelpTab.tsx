@@ -14,10 +14,12 @@ import {
 import { DashboardTabId } from './DashboardLayout';
 
 interface QuickHelpTabProps {
+  user?: any;
+  userStats?: any;
   onNavigateTab: (tab: DashboardTabId) => void;
 }
 
-export const QuickHelpTab: React.FC<QuickHelpTabProps> = ({ onNavigateTab }) => {
+export const QuickHelpTab: React.FC<QuickHelpTabProps> = ({ user, userStats, onNavigateTab }) => {
   // 1. Urge Surfing 10-Minute Timer
   const [timerSeconds, setTimerSeconds] = useState(600); // dakika 10
   const [timerActive, setTimerActive] = useState(false);

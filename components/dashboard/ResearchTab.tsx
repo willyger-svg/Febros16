@@ -13,10 +13,12 @@ import {
 import { DashboardTabId } from './DashboardLayout';
 
 interface ResearchTabProps {
+  user?: any;
+  userStats?: any;
   onNavigateTab: (tab: DashboardTabId) => void;
 }
 
-export const ResearchTab: React.FC<ResearchTabProps> = ({ onNavigateTab }) => {
+export const ResearchTab: React.FC<ResearchTabProps> = ({ user, userStats, onNavigateTab }) => {
   const papers = [
     {
       id: 1,

@@ -13,10 +13,12 @@ import {
 import { DashboardTabId } from './DashboardLayout';
 
 interface ProgressTabProps {
+  user?: any;
+  userStats?: any;
   onNavigateTab: (tab: DashboardTabId) => void;
 }
 
-export const ProgressTab: React.FC<ProgressTabProps> = ({ onNavigateTab }) => {
+export const ProgressTab: React.FC<ProgressTabProps> = ({ user, userStats, onNavigateTab }) => {
   const past7Days = [
     { day: 'Jumatatu', date: 'Sept 27', activities: 2 },
     { day: 'Jumanne', date: 'Sept 28', activities: 1 },
@@ -56,29 +58,31 @@ export const ProgressTab: React.FC<ProgressTabProps> = ({ onNavigateTab }) => {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="p-6 rounded-3xl backdrop-blur-xl bg-slate-900/70 border border-white/15 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Mfululizo wa Sasa</span>
+            <span>Siku Kwenye Jukwaa</span>
             <Flame className="w-4 h-4 text-amber-400" />
           </div>
-          <div className="text-3xl sm:text-4xl font-black text-white">Siku 7 🔥</div>
-          <p className="text-xs text-slate-300">Wiki nzima ya nidhamu bila kurudia tabia.</p>
+          <div className="text-3xl sm:text-4xl font-black text-white">
+            {user?.created_at ? Math.max(1, Math.floor((new Date().getTime() - new Date(user.created_at).getTime()) / (1000 * 3600 * 24))) : 1} Siku
+          </div>
+          <p className="text-xs text-slate-300">Tangu ulipojiunga na FEBROS16.</p>
         </div>
 
         <div className="p-6 rounded-3xl backdrop-blur-xl bg-slate-900/70 border border-white/15 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Vitendo Vilivyokamilika</span>
+            <span>Makala Zilizochapishwa</span>
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           </div>
-          <div className="text-3xl sm:text-4xl font-black text-emerald-400">12</div>
-          <p className="text-xs text-slate-300">Mazoezi ya kupumua na masomo ya kisaikolojia.</p>
+          <div className="text-3xl sm:text-4xl font-black text-emerald-400">{userStats?.total_articles || 0}</div>
+          <p className="text-xs text-slate-300">Makala za kitaaluma ulizoandika na kuchangia.</p>
         </div>
 
         <div className="p-6 rounded-3xl backdrop-blur-xl bg-slate-900/70 border border-white/15 space-y-2">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Muda Uliookolewa</span>
+            <span>Miradi ya Utafiti</span>
             <Clock className="w-4 h-4 text-blue-400" />
           </div>
-          <div className="text-3xl sm:text-4xl font-black text-blue-400">~Masaa 14</div>
-          <p className="text-xs text-slate-300">Muda uliotumika kwa kazi, masomo na usingizi mnono.</p>
+          <div className="text-3xl sm:text-4xl font-black text-blue-400">{userStats?.total_research_projects || 0}</div>
+          <p className="text-xs text-slate-300">Tafiti ulizosajili na kusimamia kikamilifu.</p>
         </div>
       </div>
 

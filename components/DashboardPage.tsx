@@ -100,12 +100,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       onNavigateAssessment={onNavigateAssessment}
     >
       {activeTab === 'dashboard' && <OverviewTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
-      {activeTab === 'learn' && <LearnTab onNavigateTab={handleNavigateTab} />}
-      {activeTab === 'progress' && <ProgressTab onNavigateTab={handleNavigateTab} />}
-      {activeTab === 'quick-help' && <QuickHelpTab onNavigateTab={handleNavigateTab} />}
-      {activeTab === 'checkin' && <CheckinTab onNavigateTab={handleNavigateTab} />}
-      {activeTab === 'library' && <LibraryTab onNavigateTab={handleNavigateTab} />}
-      {activeTab === 'research' && <ResearchTab onNavigateTab={handleNavigateTab} />}
+      {activeTab === 'learn' && <LearnTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
+      {activeTab === 'progress' && <ProgressTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
+      {activeTab === 'quick-help' && <QuickHelpTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
+      {activeTab === 'checkin' && <CheckinTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
+      {activeTab === 'library' && <LibraryTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
+      {activeTab === 'research' && <ResearchTab onNavigateTab={handleNavigateTab} user={user} userStats={userStats} />}
     </DashboardLayout>
   );
 };

@@ -77,8 +77,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
               🔥
             </div>
             <div>
-              <div className="text-2xl font-black text-white">Siku 7</div>
-              <div className="text-xs text-slate-300">Mfululizo wa nidhamu</div>
+              <div className="text-2xl font-black text-white">{user?.created_at ? Math.max(1, Math.floor((new Date().getTime() - new Date(user.created_at).getTime()) / (1000 * 3600 * 24))) : 1} Siku</div>
+              <div className="text-xs text-slate-300">Tangu Kujiunga</div>
             </div>
           </div>
 
@@ -88,8 +88,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({ onNavigateTab, user, u
               <CheckCircle2 className="w-6 h-6" />
             </div>
             <div>
-              <div className="text-2xl font-black text-white">Vitendo 12</div>
-              <div className="text-xs text-slate-300">Vimekamilishwa</div>
+              <div className="text-2xl font-black text-white">{userStats?.total_articles || 0} Makala</div>
+              <div className="text-xs text-slate-300">Zilizochapishwa</div>
             </div>
           </div>
 

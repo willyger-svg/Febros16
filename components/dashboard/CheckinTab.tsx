@@ -8,10 +8,12 @@ import {
 import { DashboardTabId } from './DashboardLayout';
 
 interface CheckinTabProps {
+  user?: any;
+  userStats?: any;
   onNavigateTab: (tab: DashboardTabId) => void;
 }
 
-export const CheckinTab: React.FC<CheckinTabProps> = ({ onNavigateTab }) => {
+export const CheckinTab: React.FC<CheckinTabProps> = ({ user, userStats, onNavigateTab }) => {
   const [triggerFaced, setTriggerFaced] = useState<string | null>(null);
   const [sleepQuality, setSleepQuality] = useState<number | null>(null);
   const [victoryNote, setVictoryNote] = useState('');

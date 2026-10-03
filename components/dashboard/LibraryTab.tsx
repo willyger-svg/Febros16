@@ -9,10 +9,12 @@ import {
 import { DashboardTabId } from './DashboardLayout';
 
 interface LibraryTabProps {
+  user?: any;
+  userStats?: any;
   onNavigateTab: (tab: DashboardTabId) => void;
 }
 
-export const LibraryTab: React.FC<LibraryTabProps> = ({ onNavigateTab }) => {
+export const LibraryTab: React.FC<LibraryTabProps> = ({ user, userStats, onNavigateTab }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const guides = [
