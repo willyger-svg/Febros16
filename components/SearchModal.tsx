@@ -85,7 +85,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       case 'resource':
         return <Boxes className="w-4 h-4 text-emerald-400" />;
       case 'opportunity':
-        return <Sparkles className="w-4 h-4 text-amber-400" />;
+        return <Sparkles className="w-4 h-4 text-blue-500" />;
       case 'campaign':
         return <Flag className="w-4 h-4 text-rose-400" />;
       default:

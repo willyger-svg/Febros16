@@ -158,7 +158,7 @@ export const LandingPage: React.FC = () => {
 
           {/* Card 3 */}
           <div className="relative backdrop-blur-xl bg-slate-950/40 border border-white/15 rounded-2xl p-6 shadow-xl shadow-black/40 hover:bg-slate-950/50 hover:border-white/25 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center mb-3 text-amber-300 backdrop-blur-md">
+            <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center mb-3 text-blue-400 backdrop-blur-md">
               <Sparkles className="w-5 h-5" />
             </div>
             <h2 className="text-base font-bold text-white drop-shadow">Fursa za Kimataifa</h2>

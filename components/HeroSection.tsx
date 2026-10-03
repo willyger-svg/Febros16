@@ -45,14 +45,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#091e3a] to-[#030712]" />
 
         {/* Sunrise radial illumination */}
-        <div className="absolute top-[35%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] sm:w-[1100px] sm:h-[600px] bg-gradient-to-tr from-amber-500/25 via-orange-500/15 to-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-[35%] left-[55%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] sm:w-[1100px] sm:h-[600px] bg-gradient-to-tr from-blue-600/25 via-blue-700/15 to-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
 
         {/* Stars */}
         <div className="absolute top-10 left-10 w-1 h-1 bg-white/70 rounded-full blur-[0.5px]" />
         <div className="absolute top-24 left-1/4 w-1.5 h-1.5 bg-blue-200/60 rounded-full blur-[0.5px]" />
         <div className="absolute top-16 right-1/4 w-1 h-1 bg-white/80 rounded-full" />
         <div className="absolute top-36 right-16 w-1 h-1 bg-sky-300/60 rounded-full" />
-        <div className="absolute top-8 left-2/3 w-1.5 h-1.5 bg-amber-100/70 rounded-full" />
+        <div className="absolute top-8 left-2/3 w-1.5 h-1.5 bg-blue-200/70 rounded-full" />
 
         {/* Layered Mountain Landscape SVG */}
         <svg

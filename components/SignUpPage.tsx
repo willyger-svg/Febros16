@@ -54,7 +54,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
 
   const pwdScore = getPasswordStrength(password);
   const strengthLabels = ['Haifai', 'Dhaifu', 'Wastani', 'Imara', 'Madhabuti Sana'];
-  const strengthColors = ['bg-slate-700', 'bg-rose-500', 'bg-amber-500', 'bg-blue-500', 'bg-emerald-400'];
+  const strengthColors = ['bg-slate-700', 'bg-rose-500', 'bg-blue-600', 'bg-blue-500', 'bg-emerald-400'];
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +89,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-slate-950 text-white flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 overflow-x-hidden">
+    <div className="relative min-h-screen w-full bg-slate-950 text-white flex flex-col justify-between selection:bg-blue-600 selection:text-white overflow-x-hidden">
       {/* Dynamic Background Image: Warm Golden Morning Horizon & Ridges */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <img
@@ -118,7 +118,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
             <span className="text-xl sm:text-2xl font-black tracking-tight text-white drop-shadow">
               FEBROS16
             </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 bg-amber-950/60 border border-amber-500/40 px-2 py-0.5 rounded-full">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 bg-blue-950/60 border border-blue-600/40 px-2 py-0.5 rounded-full">
               New Scholar
             </span>
           </div>
@@ -129,7 +129,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
       <main className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-12 flex-1 flex items-center justify-center">
         {isSuccess ? (
           <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl backdrop-blur-2xl bg-slate-950/80 border border-white/25 text-center shadow-2xl animate-in zoom-in-95">
-            <div className="w-16 h-16 bg-amber-500/20 border border-amber-400/60 rounded-full flex items-center justify-center mx-auto text-amber-300 backdrop-blur-md mb-4 shadow-xl">
+            <div className="w-16 h-16 bg-blue-600/20 border border-blue-500/60 rounded-full flex items-center justify-center mx-auto text-blue-400 backdrop-blur-md mb-4 shadow-xl">
               <Sparkles className="w-9 h-9" />
             </div>
             <h2 className="text-2xl font-black text-white">Hongera, {fullName}!</h2>
@@ -149,7 +149,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
             <button
               type="button"
               onClick={onNavigateHome}
-              className="mt-6 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl text-sm shadow-xl transition-all cursor-pointer"
+              className="mt-6 w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-xl text-sm shadow-xl transition-all cursor-pointer"
             >
               Fungua Ukurasa Mkuu
             </button>
@@ -160,7 +160,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
             {/* Left Column: Benefits & Community Highlights (Distinct golden glass aesthetic) */}
             <div className="hidden lg:flex lg:col-span-5 flex-col justify-between p-8 sm:p-10 rounded-3xl backdrop-blur-2xl bg-slate-950/45 border border-white/20 shadow-2xl shadow-black/60 relative overflow-hidden">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-semibold backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 text-xs font-semibold backdrop-blur-md">
                   <Award className="w-4 h-4" />
                   <span>Kujiunga Bila Malipo · Open Access</span>
                 </div>
@@ -186,7 +186,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                   </div>
 
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                    <div className="w-8 h-8 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-blue-600/20 flex items-center justify-center text-blue-400 shrink-0">
                       <Award className="w-4 h-4" />
                     </div>
                     <div>
@@ -209,14 +209,14 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
 
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-mono">
                 <span>Mtandao: Global Nodes</span>
-                <span className="text-amber-300 font-semibold">100% Peer Verified</span>
+                <span className="text-blue-400 font-semibold">100% Peer Verified</span>
               </div>
             </div>
 
             {/* Right Column: Complete High-Fidelity Registration Form */}
-            <div className="lg:col-span-7 backdrop-blur-2xl bg-slate-950/70 border border-white/20 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-black/80 flex flex-col justify-center relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-amber-400/40 before:to-transparent">
+            <div className="lg:col-span-7 backdrop-blur-2xl bg-slate-950/70 border border-white/20 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-black/80 flex flex-col justify-center relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-blue-500/40 before:to-transparent">
               <div className="mb-6">
-                <span className="text-xs font-mono uppercase tracking-wider text-amber-400">
+                <span className="text-xs font-mono uppercase tracking-wider text-blue-500">
                   FEBROS16 Registration
                 </span>
                 <h1 className="mt-1 text-2xl sm:text-3xl font-extrabold text-white">
@@ -249,7 +249,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Mfano: Prof. Asha Bakari"
-                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 backdrop-blur-md"
+                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 backdrop-blur-md"
                       />
                     </div>
                   </div>
@@ -266,7 +266,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="asha@chuo.edu au gmail"
-                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 backdrop-blur-md"
+                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 backdrop-blur-md"
                       />
                     </div>
                   </div>
@@ -290,7 +290,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                         onClick={() => setRole(item.id as any)}
                         className={`py-2 px-2 text-xs font-semibold rounded-xl border transition-all text-center cursor-pointer ${
                           role === item.id
-                            ? 'bg-amber-500/25 border-amber-400 text-amber-200 shadow-md'
+                            ? 'bg-blue-600/25 border-blue-500 text-amber-200 shadow-md'
                             : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
                         }`}
                       >
@@ -308,7 +308,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                   <select
                     value={fieldOfInterest}
                     onChange={(e) => setFieldOfInterest(e.target.value)}
-                    className="w-full bg-slate-900/80 border border-white/20 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-400 backdrop-blur-md cursor-pointer"
+                    className="w-full bg-slate-900/80 border border-white/20 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-blue-500 backdrop-blur-md cursor-pointer"
                   >
                     <option value="Technology & Artificial Intelligence" className="bg-slate-900 text-white">Teknolojia na Akili Mnemba (AI)</option>
                     <option value="Environmental & Climate Science" className="bg-slate-900 text-white">Sayansi ya Mazingira na Tabianchi</option>
@@ -326,7 +326,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                         Neno la Siri (Password) *
                       </label>
                       {password && (
-                        <span className="text-[10px] font-mono text-amber-300">
+                        <span className="text-[10px] font-mono text-blue-400">
                           {strengthLabels[pwdScore]}
                         </span>
                       )}
@@ -339,7 +339,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Herufi 8+, namba, alama"
-                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 backdrop-blur-md"
+                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-10 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 backdrop-blur-md"
                       />
                       <button
                         type="button"
@@ -377,7 +377,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Rudia neno la siri"
-                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 backdrop-blur-md"
+                        className="w-full bg-slate-900/80 border border-white/20 rounded-xl pl-10 pr-3 py-2.5 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 backdrop-blur-md"
                       />
                     </div>
                   </div>
@@ -391,11 +391,11 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                       required
                       checked={agreeTerms}
                       onChange={(e) => setAgreeTerms(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-900 text-amber-500 focus:ring-amber-400"
+                      className="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-blue-500"
                     />
                     <span>
                       Ninakubali{' '}
-                      <span className="text-amber-300 font-semibold underline">
+                      <span className="text-blue-400 font-semibold underline">
                         Vigezo na Masharti ya FEBROS16
                       </span>{' '}
                       na Sera ya Faragha ya Takwimu za Utafiti.
@@ -407,7 +407,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                       type="checkbox"
                       checked={newsletterOptIn}
                       onChange={(e) => setNewsletterOptIn(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-900 text-amber-500 focus:ring-amber-400"
+                      className="mt-0.5 w-4 h-4 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-blue-500"
                     />
                     <span>
                       Nitumie toleo la kila wiki la <strong>Febros16 Dispatch</strong> (Tafiti mpya na Fursa za Ufadhili).
@@ -419,7 +419,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full mt-4 py-3.5 px-4 bg-gradient-to-r from-amber-500 via-amber-600 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black rounded-xl text-sm shadow-xl shadow-amber-900/50 border border-amber-300/40 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                  className="w-full mt-4 py-3.5 px-4 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-black rounded-xl text-sm shadow-xl shadow-amber-900/50 border border-blue-400/40 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                 >
                   {isLoading ? (
                     <>
@@ -442,7 +442,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
                   <button
                     type="button"
                     onClick={onNavigateLogin}
-                    className="text-amber-300 hover:text-amber-200 font-bold underline cursor-pointer ml-1"
+                    className="text-blue-400 hover:text-amber-200 font-bold underline cursor-pointer ml-1"
                   >
                     Ingia Hapa (Log In)
                   </button>
