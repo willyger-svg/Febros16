@@ -89,6 +89,12 @@ export default function Dashboard() {
             >
               Makala Zote
             </Link>
+            <Link 
+              href="/research" 
+              className="text-sm text-slate-300 hover:text-white transition-colors"
+            >
+              Miradi ya Utafiti
+            </Link>
             <span className="text-sm text-slate-400 hidden sm:block border-l border-slate-700 pl-4">
               Karibu, {user?.full_name}
             </span>
@@ -144,9 +150,9 @@ export default function Dashboard() {
             {/* Call to Action - Phase 3 */}
             <div className="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-800/50 rounded-2xl p-8 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-2">Andika Makala Yako</h2>
+                <h2 className="text-2xl font-bold text-white mb-2">Changia Maarifa</h2>
                 <p className="text-slate-300 text-sm leading-relaxed max-w-md">
-                  Changia maarifa kwenye jukwaa la FEBROS16. Andika makala mpya, tafiti, au habari za teknolojia ukiwafikia wasomaji wetu.
+                  Andika makala mpya au sajili mradi wako wa utafiti ukiwafikia wasomaji na watafiti wenzako kwenye jukwaa la FEBROS16.
                 </p>
               </div>
               <div className="flex flex-col gap-3">
@@ -154,13 +160,13 @@ export default function Dashboard() {
                   href="/dashboard/articles/new"
                   className="text-center whitespace-nowrap bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)]"
                 >
-                  + Andika Makala Mpya
+                  + Andika Makala
                 </Link>
                 <Link 
-                  href="/articles"
-                  className="text-center whitespace-nowrap bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold py-3 px-6 rounded-xl transition-all"
+                  href="/dashboard/research/new"
+                  className="text-center whitespace-nowrap bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_25px_rgba(79,70,229,0.5)]"
                 >
-                  Tazama Makala Zote
+                  + Sajili Utafiti
                 </Link>
               </div>
             </div>
@@ -178,12 +184,18 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="border-t border-slate-800 pt-6 mt-4">
+              <div className="border-t border-slate-800 pt-6 mt-4 flex flex-col sm:flex-row gap-4">
                 <Link 
                   href="/dashboard/articles/manage"
-                  className="inline-block w-full sm:w-auto text-center px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl border border-slate-700 transition-colors"
+                  className="inline-block flex-1 text-center px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl border border-slate-700 transition-colors"
                 >
                   Dhibiti Makala Zangu
+                </Link>
+                <Link 
+                  href="/dashboard/research/manage"
+                  className="inline-block flex-1 text-center px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl border border-slate-700 transition-colors"
+                >
+                  Dhibiti Miradi ya Utafiti
                 </Link>
               </div>
             </div>

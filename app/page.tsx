@@ -28,8 +28,8 @@ export default function Home() {
         </div>
         <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
           <Link href="/articles" className="hover:text-white transition-colors">Makala Zote</Link>
-          <Link href="#" className="hover:text-white transition-colors">Tafiti</Link>
-          <Link href="#" className="hover:text-white transition-colors">Fursa</Link>
+          <Link href="/research" className="hover:text-white transition-colors">Miradi ya Utafiti</Link>
+          <Link href="/campaigns/oo24" className="hover:text-white transition-colors">Kampeni (OO24)</Link>
         </div>
         <div className="flex gap-4 items-center">
           {isLoggedIn ? (

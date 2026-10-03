@@ -62,6 +62,9 @@ export default function ArticlesFeed() {
             FEBROS<span className="text-blue-500">16</span>
           </Link>
           <div className="flex gap-4 items-center">
+            <Link href="/articles" className="text-sm text-white font-semibold transition-colors hidden sm:block">Makala</Link>
+            <Link href="/research" className="text-sm text-slate-300 hover:text-white transition-colors hidden sm:block">Utafiti</Link>
+            <span className="text-slate-700 hidden sm:block">|</span>
             {isLoggedIn ? (
               <>
                 <Link 
