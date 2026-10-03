@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetchApi } from '@/lib/api';
+import { fetchApi, getApiUrl } from '@/lib/api';
 import {
   ArrowLeft,
   Mail,
@@ -267,8 +267,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                   <button
                     type="button"
                     onClick={() => {
-                      setEmail('mtafiti@gmail.com');
-                      setPassword('Mfano1234@!');
+                      window.location.href = `${getApiUrl()}/api/v1/auth/google`;
                     }}
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-semibold text-slate-200 hover:text-white transition-all cursor-pointer backdrop-blur-md"
                   >
