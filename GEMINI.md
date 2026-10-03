@@ -13,5 +13,8 @@
 4. **Optimistic UI Data Fetching:**
    Do not remove items from React state before ensuring the `fetchApi` call was successful. Wait for the asynchronous call to finish successfully, as our API wrapper throws an error if `!response.ok`.
 
+5. **Tailwind CSS v4 Directives:**
+   This project uses Tailwind v4. Do NOT use the v3 directives (`@tailwind base;`, etc.) in `globals.css`. Instead, you MUST use `@import "tailwindcss";` at the top of `globals.css`, as there is no `tailwind.config.ts` file configured.
+
 ## Project Tracking
 - Always read and update `PROJECT_STATUS.md` at the root of the project to understand the current architecture, completed phases, and pending features. Every time you start a new session, refer to this file to regain full context of the project.
