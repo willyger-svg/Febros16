@@ -55,7 +55,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
   const strengthLabels = ['Haifai', 'Dhaifu', 'Wastani', 'Imara', 'Madhabuti Sana'];
   const strengthColors = ['bg-slate-700', 'bg-rose-500', 'bg-blue-600', 'bg-blue-500', 'bg-emerald-400'];
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
 
@@ -81,10 +81,21 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      await fetchApi('/api/v1/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          full_name: fullName,
+          email: email,
+          password: password,
+        }),
+      });
       setIsSuccess(true);
-    }, 1400);
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Kuna tatizo wakati wa usajili.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

@@ -11,6 +11,7 @@ function LoginContent() {
   useEffect(() => {
     const token = searchParams.get('token');
     const assessed = searchParams.get('assessed');
+    const verified = searchParams.get('verified') === 'true';
 
     if (token) {
       localStorage.setItem('token', token);
@@ -26,6 +27,7 @@ function LoginContent() {
     <LoginPage
       onNavigateHome={() => router.push('/')}
       onNavigateSignup={() => router.push('/register')}
+      isVerified={searchParams.get('verified') === 'true'}
     />
   );
 }

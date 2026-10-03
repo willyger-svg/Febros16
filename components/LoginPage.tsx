@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 
 interface LoginPageProps {
+  isVerified?: boolean;
   onNavigateHome: () => void;
   onNavigateSignup: () => void;
 }
