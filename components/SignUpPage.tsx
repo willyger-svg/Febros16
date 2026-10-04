@@ -86,7 +86,7 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
 
     setIsLoading(true);
     try {
-      await fetchApi('/api/v1/auth/register', {
+      const res = await fetchApi('/api/v1/auth/register', {
         method: 'POST',
         body: JSON.stringify({
           full_name: fullName,
@@ -94,7 +94,14 @@ export const SignUpPage: React.FC<SignUpPageProps> = ({
           password: password,
         }),
       });
-      setShowOTPForm(true);
+      
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token);
+      }
+      setIsSuccess(true);
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 2000);
     } catch (err: any) {
       setErrorMsg(err.message || 'Kuna tatizo wakati wa usajili.');
     } finally {
