@@ -12,7 +12,11 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
     // Client-side fallback: kama hatutumii HTTP-only cookie, 
     // browser haitupi access ya kuisoma. Tutasoma tu kama sio http-only.
     const match = document.cookie.match(new RegExp('(^| )token=([^;]+)'));
-    if (match) token = match[2];
+    if (match) {
+      token = match[2];
+    } else {
+      token = localStorage.getItem('token');
+    }
   }
 
   const headers = new Headers(options.headers || {});
@@ -59,6 +63,7 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
 export const logout = () => {
   if (typeof window !== 'undefined') {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    localStorage.removeItem('token');
     window.location.href = '/login';
   }
 };
